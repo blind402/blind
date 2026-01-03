@@ -467,7 +467,7 @@
         // We need to use Solana web3.js - load from CDN
         const { Connection, PublicKey, Transaction, TransactionInstruction } = solanaWeb3;
         
-        const connection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');
+        const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=c00fe9b0-bd52-45c6-b714-3925665d8083', 'confirmed');
         const sender = new PublicKey(publicKey);
         const recipient = new PublicKey(quote.recipient);
         const usdcMint = new PublicKey(USDC_MINT);
