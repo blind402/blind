@@ -6,7 +6,7 @@
   <title>blind402 - HTTP 402 Payment Required</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,10 +15,11 @@
     }
 
     body {
-      font-family: 'Space Grotesk', -apple-system, sans-serif;
-      background: #0c0c0c;
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: #090909;
       color: #fff;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
     /* Hero */
@@ -32,21 +33,32 @@
       padding: 40px 24px;
       position: relative;
       background: 
-        radial-gradient(ellipse 100% 80% at 50% 100%, rgba(234, 88, 12, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 60% at 30% 80%, rgba(249, 115, 22, 0.3) 0%, transparent 40%),
-        radial-gradient(ellipse 60% 40% at 70% 90%, rgba(251, 146, 60, 0.25) 0%, transparent 35%),
-        #0c0c0c;
+        radial-gradient(ellipse 120% 100% at 50% 110%, rgba(251, 146, 60, 0.5) 0%, rgba(234, 88, 12, 0.2) 30%, transparent 60%),
+        #090909;
     }
 
     .hero::before {
       content: '';
       position: absolute;
-      bottom: 10%;
+      bottom: 5%;
       left: 50%;
       transform: translateX(-50%);
-      width: 800px;
-      height: 400px;
-      border: 2px solid rgba(249, 115, 22, 0.3);
+      width: 900px;
+      height: 450px;
+      border: 1.5px solid rgba(251, 146, 60, 0.25);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      border: 1px solid rgba(251, 146, 60, 0.15);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -58,254 +70,300 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 24px 48px;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(9, 9, 9, 0.85);
+      backdrop-filter: blur(16px);
     }
 
     .logo {
-      font-size: 1.125rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: #fff;
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .badge-nav {
-      padding: 8px 20px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 100px;
       font-size: 0.8125rem;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
     }
 
-    .menu-icon {
-      width: 28px;
-      height: 20px;
+    .nav-links {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
+      gap: 32px;
     }
 
-    .menu-icon span {
-      height: 2px;
-      background: #fff;
-      border-radius: 2px;
+    .nav-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
     }
 
-    /* Content */
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    /* Hero Content */
     .hero-content {
       position: relative;
       z-index: 10;
+      max-width: 900px;
     }
 
     .hero h1 {
-      font-size: clamp(3rem, 10vw, 6rem);
+      font-size: clamp(2.75rem, 9vw, 5.5rem);
       font-weight: 700;
       font-style: italic;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
       line-height: 1.05;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .hero p {
-      font-size: 1.125rem;
-      color: rgba(255,255,255,0.75);
-      max-width: 600px;
-      margin: 0 auto 48px;
+      font-size: 1.1875rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 580px;
+      margin: 0 auto 44px;
       line-height: 1.7;
-      font-weight: 400;
     }
 
     .cta-group {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       justify-content: center;
-      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 16px 32px;
+      padding: 15px 30px;
       border-radius: 100px;
-      font-size: 1rem;
+      font-size: 0.9375rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.15s;
       font-family: inherit;
+      cursor: pointer;
+      border: none;
     }
 
     .btn-primary {
-      background: #f5f0e8;
-      color: #0c0c0c;
+      background: #fef3e2;
+      color: #1a1a1a;
     }
 
     .btn-primary:hover {
       background: #fff;
+      transform: translateY(-1px);
     }
 
     .btn-primary .arrow {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
-      background: #0c0c0c;
+      width: 22px;
+      height: 22px;
+      background: #1a1a1a;
       color: #fff;
       border-radius: 50%;
-      font-size: 0.875rem;
+      font-size: 0.75rem;
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
       color: #fff;
-      border: 1px solid rgba(255,255,255,0.2);
     }
 
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.12);
     }
 
     /* Sections */
     section {
-      padding: 120px 24px;
+      padding: 100px 24px;
       max-width: 1100px;
       margin: 0 auto;
     }
 
-    section h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: -0.02em;
-      margin-bottom: 64px;
+    .section-header {
       text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     /* Steps */
     .steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
     .step {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 36px 28px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px 24px;
       text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .step:hover {
+      border-color: rgba(251, 146, 60, 0.3);
     }
 
     .step-number {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #f97316, #ea580c);
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(145deg, #fb923c, #ea580c);
       color: #fff;
-      border-radius: 50%;
-      font-size: 1.25rem;
+      border-radius: 12px;
+      font-size: 1.125rem;
       font-weight: 700;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .step h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .step p {
-      color: rgba(255,255,255,0.6);
-      font-size: 0.9375rem;
-      line-height: 1.6;
-    }
-
-    /* Code */
-    .code-section {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      overflow: hidden;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .code-header {
-      padding: 16px 24px;
-      background: rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.8125rem;
-      color: rgba(255,255,255,0.5);
-      font-weight: 500;
-    }
-
-    .code-block {
-      padding: 28px;
-      font-family: 'SF Mono', 'Consolas', monospace;
-      font-size: 0.875rem;
-      line-height: 1.8;
-      overflow-x: auto;
-      color: rgba(255,255,255,0.85);
-    }
-
-    .code-block .comment { color: rgba(255,255,255,0.35); }
-    .code-block .cmd { color: #fb923c; }
-    .code-block .str { color: #86efac; }
-
-    /* Guarantees */
-    .guarantees {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .guarantee {
-      text-align: center;
-      padding: 48px 24px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-    }
-
-    .guarantee h3 {
       font-size: 1.125rem;
       font-weight: 600;
       margin-bottom: 8px;
     }
 
-    .guarantee p {
+    .step p {
       color: rgba(255,255,255,0.5);
       font-size: 0.875rem;
     }
 
+    /* Code */
+    .code-section {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .code-header {
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-block {
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      line-height: 1.9;
+      overflow-x: auto;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .code-block .comment { color: rgba(255,255,255,0.3); }
+    .code-block .cmd { color: #fb923c; }
+    .code-block .str { color: #4ade80; }
+
+    /* Guarantees */
+    .guarantees {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .guarantee {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .guarantee:hover {
+      border-color: rgba(251, 146, 60, 0.3);
+    }
+
+    .guarantee h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .guarantee p {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.8125rem;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 28px 0;
+    }
+
+    .faq-item:first-child {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .faq-question {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .faq-answer {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+    }
+
     /* Footer */
     footer {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 48px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 24px;
       text-align: center;
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin-bottom: 24px;
+      gap: 36px;
+      margin-bottom: 20px;
     }
 
     .footer-links a {
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.5);
       text-decoration: none;
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 500;
       transition: color 0.2s;
     }
@@ -315,24 +373,24 @@
     }
 
     footer p {
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.25);
       font-size: 0.8125rem;
     }
 
     @media (max-width: 900px) {
-      .steps, .guarantees {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .steps, .guarantees { grid-template-columns: repeat(2, 1fr); }
+      .badge-nav { display: none; }
     }
 
     @media (max-width: 600px) {
-      nav { padding: 20px 24px; }
-      .badge-nav { display: none; }
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
       .steps, .guarantees { grid-template-columns: 1fr; }
-      section { padding: 80px 20px; }
-      section h2 { font-size: 1.75rem; margin-bottom: 40px; }
-      .cta-group { flex-direction: column; }
+      section { padding: 72px 20px; }
+      .section-header h2 { font-size: 1.625rem; }
+      .cta-group { flex-direction: column; width: 100%; }
       .btn { width: 100%; justify-content: center; }
+      .hero::before, .hero::after { display: none; }
     }
   </style>
 </head>
@@ -340,10 +398,10 @@
   <nav>
     <a href="/" class="logo">blind402</a>
     <div class="badge-nav">HTTP 402 Protocol</div>
-    <div class="menu-icon">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/blind402/blind">GitHub</a>
     </div>
   </nav>
 
@@ -356,47 +414,51 @@
           Get Started <span class="arrow">→</span>
         </a>
         <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md" class="btn btn-secondary">
-          Learn More
+          Read Protocol
         </a>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>How It Works</h2>
+  <section id="how">
+    <div class="section-header">
+      <h2>How It Works</h2>
+    </div>
     <div class="steps">
       <div class="step">
         <div class="step-number">1</div>
         <h3>Request</h3>
-        <p>Call any protected endpoint without authentication</p>
+        <p>Call any protected endpoint</p>
       </div>
       <div class="step">
         <div class="step-number">2</div>
         <h3>Quote</h3>
-        <p>Receive HTTP 402 with a signed payment quote</p>
+        <p>Get HTTP 402 with payment quote</p>
       </div>
       <div class="step">
         <div class="step-number">3</div>
         <h3>Pay</h3>
-        <p>Transfer USDC on Solana with payment ID in memo</p>
+        <p>Transfer USDC on Solana</p>
       </div>
       <div class="step">
         <div class="step-number">4</div>
         <h3>Access</h3>
-        <p>Retry with proof, get your data</p>
+        <p>Retry with proof, get data</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h2>Example</h2>
+    <div class="section-header">
+      <h2>Example</h2>
+    </div>
     <div class="code-section">
-      <div class="code-header">Terminal</div>
+      <div class="code-header">terminal</div>
       <div class="code-block">
 <span class="comment"># Request returns 402 with payment quote</span>
 <span class="cmd">curl</span> https://api.blind402.com/v1/data
 
-<span class="comment"># After paying, retry with headers</span>
+<span class="comment"># Pay USDC, then retry with headers</span>
 <span class="cmd">curl</span> https://api.blind402.com/v1/data \
   -H <span class="str">"X-BLIND402-QUOTE: {quote}"</span> \
   -H <span class="str">"X-BLIND402-PAYMENT: {signature}"</span>
@@ -405,7 +467,9 @@
   </section>
 
   <section>
-    <h2>Guarantees</h2>
+    <div class="section-header">
+      <h2>Guarantees</h2>
+    </div>
     <div class="guarantees">
       <div class="guarantee">
         <h3>No Accounts</h3>
@@ -422,6 +486,38 @@
       <div class="guarantee">
         <h3>Stateless</h3>
         <p>Verified per request</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-header">
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">What is HTTP 402?</div>
+        <div class="faq-answer">HTTP 402 Payment Required is a status code reserved for digital payment systems. It signals that payment is needed before the server will fulfill the request. blind402 implements this using Solana USDC transfers.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What currency is used for payment?</div>
+        <div class="faq-answer">USDC on Solana mainnet. Payments are verified on-chain using the transaction signature and memo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Do I need to create an account?</div>
+        <div class="faq-answer">No. There are no accounts, no API keys, and no signup. You just need a Solana wallet with USDC to make payments.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Is my identity tracked?</div>
+        <div class="faq-answer">No. blind402 stores no user identity. There are no cookies, sessions, or tracking. The only data retained is transaction signatures for replay protection, which expire after 15 minutes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How long is a quote valid?</div>
+        <div class="faq-answer">Quotes expire after 60 seconds. You must pay and submit the payment proof within this window.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can I reuse a payment?</div>
+        <div class="faq-answer">No. Each transaction signature can only be used once. Replay attacks are blocked.</div>
       </div>
     </div>
   </section>
