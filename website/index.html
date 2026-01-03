@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>blind402 - HTTP 402 Payment Required for APIs</title>
+  <title>blind402 - HTTP 402 Payment Required</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fafafa;
-      --fg: #111;
-      --muted: #666;
-      --border: #e5e5e5;
-      --code-bg: #f5f5f5;
-      --accent: #000;
+      --bg: #0a0a0a;
+      --bg-elevated: #141414;
+      --fg: #ffffff;
+      --muted: #888;
+      --accent: #f97316;
+      --border: #262626;
     }
 
     * {
@@ -22,267 +25,410 @@
 
     html {
       font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--fg);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 24px;
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--fg);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--fg);
     }
 
     /* Hero */
     .hero {
-      padding: 120px 0 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(249, 115, 22, 0.15), transparent);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 32px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .hero h1 {
-      font-size: 3rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-    }
-
-    .hero .subtitle {
-      font-size: 1.125rem;
-      color: var(--muted);
-      font-weight: 400;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
       margin-bottom: 24px;
+      max-width: 800px;
     }
 
-    .hero .description {
-      font-size: 1.125rem;
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #e5e5e5;
+    }
+
+    .btn-secondary {
+      background: transparent;
       color: var(--fg);
-      max-width: 480px;
-      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-elevated);
+      border-color: #404040;
     }
 
     /* Sections */
     section {
-      padding: 64px 0;
-      border-top: 1px solid var(--border);
+      padding: 120px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     section h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 48px;
+      text-align: center;
     }
 
-    section p {
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    /* Steps */
+    /* How it works */
     .steps {
-      list-style: none;
-      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
     }
 
-    .steps li {
-      position: relative;
-      padding-left: 40px;
-      margin-bottom: 16px;
-      color: var(--fg);
+    .step {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
     }
 
-    .steps li::before {
-      counter-increment: step;
-      content: counter(step);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background: var(--fg);
-      color: var(--bg);
-      border-radius: 50%;
-      font-size: 0.75rem;
-      font-weight: 600;
-      display: flex;
+    .step-number {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.9375rem;
     }
 
     /* Code */
-    .code-block {
-      background: var(--code-bg);
+    .code-section {
+      background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px 24px;
-      overflow-x: auto;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      padding: 16px 24px;
+      background: #1a1a1a;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .code-block {
+      padding: 24px;
       font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
       font-size: 0.875rem;
-      line-height: 1.5;
-      color: var(--fg);
+      line-height: 1.7;
+      overflow-x: auto;
     }
 
     .code-block .comment {
-      color: var(--muted);
+      color: #525252;
+    }
+
+    .code-block .cmd {
+      color: var(--accent);
     }
 
     /* Guarantees */
     .guarantees {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .guarantee {
-      padding: 20px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .guarantee-title {
-      font-size: 0.875rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .guarantee-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-    }
-
-    /* Links */
-    .links {
-      display: flex;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 24px;
     }
 
-    .links a {
-      color: var(--fg);
-      text-decoration: none;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      padding-bottom: 2px;
-      border-bottom: 1px solid var(--border);
-      transition: border-color 0.15s;
+    .guarantee {
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
     }
 
-    .links a:hover {
-      border-color: var(--fg);
+    .guarantee h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .guarantee p {
+      color: var(--muted);
+      font-size: 0.875rem;
     }
 
     /* Footer */
     footer {
-      padding: 48px 0;
       border-top: 1px solid var(--border);
+      padding: 48px 24px;
       text-align: center;
     }
 
-    footer p {
-      font-size: 0.875rem;
-      color: var(--muted);
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
     }
 
-    @media (max-width: 600px) {
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--fg);
+    }
+
+    footer p {
+      color: #525252;
+      font-size: 0.8125rem;
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        padding: 16px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
       .hero {
-        padding: 80px 0 60px;
+        padding: 100px 20px 60px;
       }
 
-      .hero h1 {
-        font-size: 2.25rem;
-      }
-
-      .guarantees {
-        grid-template-columns: 1fr;
-      }
-
-      .links {
+      .cta-group {
         flex-direction: column;
-        gap: 16px;
+        width: 100%;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+
+      section {
+        padding: 80px 20px;
+      }
+
+      section h2 {
+        font-size: 1.75rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="hero">
-      <h1>blind402</h1>
-      <p class="subtitle">HTTP 402 Payment Required for APIs</p>
-      <p class="description">
-        Gate API access behind Solana USDC micropayments. No accounts. No API keys. Pay per request.
-      </p>
-    </header>
+  <nav>
+    <a href="/" class="logo">blind402</a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#example">Example</a>
+      <a href="https://github.com/blind402/blind">GitHub</a>
+    </div>
+  </nav>
 
-    <section>
-      <h2>What it does</h2>
-      <p>
-        blind402 implements HTTP status code 402 for real-world use. Clients pay for each API request using USDC on Solana. The server verifies payment on-chain before returning the response. There is no authentication, no rate limiting by identity, and no stored user data.
-      </p>
-    </section>
+  <section class="hero">
+    <div class="badge">HTTP 402 Protocol</div>
+    <h1>Pay Per Request. <span>Zero Friction.</span></h1>
+    <p>Gate API access behind Solana USDC micropayments. No accounts. No API keys. No identity. Just pay and access.</p>
+    <div class="cta-group">
+      <a href="https://github.com/blind402/blind" class="btn btn-primary">View on GitHub</a>
+      <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md" class="btn btn-secondary">Read Protocol</a>
+    </div>
+  </section>
 
-    <section>
-      <h2>How it works</h2>
-      <ol class="steps">
-        <li>Client requests a protected endpoint</li>
-        <li>Server responds with HTTP 402 and a payment quote</li>
-        <li>Client transfers USDC on Solana with the payment ID in the memo</li>
-        <li>Client retries the request with the quote and transaction signature</li>
-        <li>Server verifies payment on-chain and returns the resource</li>
-      </ol>
-    </section>
+  <section id="how">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Request</h3>
+        <p>Client calls any protected API endpoint without authentication</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Quote</h3>
+        <p>Server responds with HTTP 402 and a signed payment quote</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Pay</h3>
+        <p>Client transfers USDC on Solana with payment ID in memo</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Access</h3>
+        <p>Client retries with proof. Server verifies on-chain and returns data</p>
+      </div>
+    </div>
+  </section>
 
-    <section>
-      <h2>Example</h2>
+  <section id="example">
+    <h2>Example</h2>
+    <div class="code-section">
+      <div class="code-header">Terminal</div>
       <div class="code-block">
-        <span class="comment"># Request without payment</span><br>
-        curl https://api.blind402.com/v1/data<br><br>
-        <span class="comment"># Returns 402 with quote</span><br><br>
-        <span class="comment"># After paying, retry with headers</span><br>
-        curl https://api.blind402.com/v1/data \<br>
-        &nbsp;&nbsp;-H "X-BLIND402-QUOTE: {quote_json}" \<br>
-        &nbsp;&nbsp;-H "X-BLIND402-PAYMENT: {tx_signature}"
-      </div>
-    </section>
+<span class="comment"># Request without payment - returns 402 with quote</span>
+<span class="cmd">curl</span> https://api.blind402.com/v1/data
 
-    <section>
-      <h2>Guarantees</h2>
-      <div class="guarantees">
-        <div class="guarantee">
-          <div class="guarantee-title">No accounts</div>
-          <div class="guarantee-desc">No signup, no login, no user database</div>
-        </div>
-        <div class="guarantee">
-          <div class="guarantee-title">No API keys</div>
-          <div class="guarantee-desc">Payment is the only authentication</div>
-        </div>
-        <div class="guarantee">
-          <div class="guarantee-title">No identity</div>
-          <div class="guarantee-desc">No tracking, no cookies, no sessions</div>
-        </div>
-        <div class="guarantee">
-          <div class="guarantee-title">Stateless</div>
-          <div class="guarantee-desc">Each request is independently verified</div>
-        </div>
-      </div>
-    </section>
+<span class="comment"># After paying USDC with memo "BLIND402:{payment_id}"</span>
+<span class="cmd">curl</span> https://api.blind402.com/v1/data \
+  -H <span style="color:#a5d6ff">"X-BLIND402-QUOTE: {quote_json}"</span> \
+  -H <span style="color:#a5d6ff">"X-BLIND402-PAYMENT: {tx_signature}"</span>
 
-    <section>
-      <h2>Resources</h2>
-      <div class="links">
-        <a href="https://github.com/blind402/blind">GitHub Repository</a>
-        <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md">Protocol Specification</a>
+<span class="comment"># Returns protected data</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <p>blind402</p>
-    </footer>
-  </div>
+  <section>
+    <h2>Guarantees</h2>
+    <div class="guarantees">
+      <div class="guarantee">
+        <h3>No Accounts</h3>
+        <p>No signup, login, or user database</p>
+      </div>
+      <div class="guarantee">
+        <h3>No API Keys</h3>
+        <p>Payment is the only authentication</p>
+      </div>
+      <div class="guarantee">
+        <h3>No Identity</h3>
+        <p>No tracking, cookies, or sessions</p>
+      </div>
+      <div class="guarantee">
+        <h3>Stateless</h3>
+        <p>Each request verified independently</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/blind402/blind">GitHub</a>
+      <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md">Protocol</a>
+    </div>
+    <p>blind402</p>
+  </footer>
 </body>
 </html>
