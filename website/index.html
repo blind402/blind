@@ -364,7 +364,13 @@
     </div>
   </footer>
 
+  <!-- Buffer polyfill for browser -->
+  <script src="https://bundle.run/buffer@6.0.3"></script>
+  <!-- Solana Web3.js -->
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
   <script>
+    // Make Buffer available globally
+    window.Buffer = buffer.Buffer;
     const API_URL = 'https://blind-production-6ed3.up.railway.app/v1/data';
     const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
     const MEMO_PROGRAM = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr';
@@ -564,9 +570,6 @@
       });
     }
   </script>
-  
-  <!-- Solana Web3.js -->
-  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
 
 </body>
 </html>
