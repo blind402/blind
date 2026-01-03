@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>blind402 - HTTP 402 Payment Required</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.7;
+      padding: 4rem 2rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
+    h2 { color: #fff; font-size: 1.25rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+    p { margin-bottom: 1rem; color: #b0b0b0; }
+    a { color: #7aa2f7; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background: #1a1a1a; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.9rem; }
+    pre {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 6px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .subtitle { color: #666; font-size: 1rem; margin-bottom: 2rem; }
+    .links { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; }
+    .links a { display: inline-block; margin-right: 2rem; }
+    ul { margin: 1rem 0 1rem 1.5rem; color: #b0b0b0; }
+    li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>blind402</h1>
+  <p class="subtitle">HTTP 402 Payment Required for APIs</p>
+
+  <p>
+    blind402 is a protocol for gating API access behind Solana USDC micropayments. 
+    Clients pay per request. No accounts. No API keys. No authentication.
+  </p>
+
+  <h2>What is HTTP 402?</h2>
+  <p>
+    HTTP 402 Payment Required is a status code reserved for digital payment systems. 
+    It indicates that a request cannot be fulfilled until the client provides payment. 
+    blind402 implements this status code using Solana USDC transfers.
+  </p>
+
+  <h2>How It Works</h2>
+  <ul>
+    <li>Client requests a protected endpoint</li>
+    <li>Server responds with HTTP 402 and a payment quote</li>
+    <li>Client transfers USDC on Solana with a memo containing the payment ID</li>
+    <li>Client retries the request with the quote and transaction signature in headers</li>
+    <li>Server verifies the payment on-chain and returns the resource</li>
+  </ul>
+
+  <h2>Example</h2>
+  <p>Request without payment:</p>
+  <pre>curl https://api.blink402.com/v1/data</pre>
+
+  <p>Response (402 Payment Required):</p>
+  <pre>{
+  "quote": {
+    "protocol": "blind402",
+    "version": 1,
+    "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "recipient": "...",
+    "amount_atomic": 1000,
+    "expires_at": 1767426853733,
+    "payment_id": "96b73a2d...",
+    "tier": 0
+  },
+  "quote_token": "9883c254..."
+}</pre>
+
+  <p>After paying USDC with memo <code>BLIND402:&lt;payment_id&gt;</code>, retry with headers:</p>
+  <pre>curl https://api.blink402.com/v1/data \
+  -H "X-BLIND402-QUOTE: {entire quote JSON}" \
+  -H "X-BLIND402-PAYMENT: &lt;tx_signature&gt;"</pre>
+
+  <h2>Privacy</h2>
+  <p>
+    blind402 stores no user identity. There are no accounts, sessions, or tracking. 
+    The only data retained is transaction signatures for replay protection, which expire after 15 minutes.
+  </p>
+
+  <div class="links">
+    <a href="https://github.com/blind402/blind">GitHub Repository</a>
+    <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md">Protocol Specification</a>
+  </div>
+</body>
+</html>
+
