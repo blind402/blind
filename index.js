@@ -5,13 +5,27 @@ import { Connection, PublicKey } from '@solana/web3.js';
 import { getAssociatedTokenAddress } from '@solana/spl-token';
 
 // =====================
+// CORS MIDDLEWARE
+// =====================
+
+function cors(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-BLIND402-QUOTE, X-BLIND402-PAYMENT');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+}
+
+// =====================
 // CONFIGURATION
 // =====================
 
 const PORT = process.env.PORT || 3000;
 const SERVER_SECRET = process.env.SERVER_SECRET || crypto.randomBytes(32).toString('hex');
-const MERCHANT_WALLET = process.env.MERCHANT_WALLET || 'YOUR_MERCHANT_WALLET_ADDRESS';
-const SOLANA_RPC = process.env.SOLANA_RPC || 'https://api.mainnet-beta.solana.com';
+const MERCHANT_WALLET = process.env.MERCHANT_WALLET || process.env.MERCHANT_ADDRESS || 'YOUR_MERCHANT_WALLET_ADDRESS';
+const SOLANA_RPC = process.env.SOLANA_RPC || process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
 const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
 const USDC_DECIMALS = 6;
 
@@ -148,7 +162,16 @@ function generateQuote(req) {
   
   const quoteToken = hmacSign(canonicalJson(payload));
   
-  return { quote: payload, quote_token: quoteToken };
+  // Return both nested format and flat format for client convenience
+  return { 
+    quote: payload, 
+    quote_token: quoteToken,
+    // Flat format for simple clients
+    payment_id: paymentId,
+    amount_usdc: price,
+    recipient: MERCHANT_WALLET,
+    expires_at: expiresAt
+  };
 }
 
 // =====================
@@ -391,6 +414,7 @@ function blind402Middleware(req, res, next) {
 
 const app = express();
 
+app.use(cors);
 app.use(express.json());
 
 // Protected route
