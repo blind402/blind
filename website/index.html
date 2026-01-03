@@ -3,100 +3,286 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>blind402 - HTTP 402 Payment Required</title>
+  <title>blind402 - HTTP 402 Payment Required for APIs</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #fafafa;
+      --fg: #111;
+      --muted: #666;
+      --border: #e5e5e5;
+      --code-bg: #f5f5f5;
+      --accent: #000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
-      background: #0a0a0a;
-      color: #e0e0e0;
-      line-height: 1.7;
-      padding: 4rem 2rem;
-      max-width: 720px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 120px 0 80px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .hero .subtitle {
+      font-size: 1.125rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .hero .description {
+      font-size: 1.125rem;
+      color: var(--fg);
+      max-width: 480px;
       margin: 0 auto;
     }
-    h1 { color: #fff; font-size: 2rem; margin-bottom: 0.5rem; }
-    h2 { color: #fff; font-size: 1.25rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
-    p { margin-bottom: 1rem; color: #b0b0b0; }
-    a { color: #7aa2f7; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { background: #1a1a1a; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.9rem; }
-    pre {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 6px;
-      padding: 1.25rem;
-      overflow-x: auto;
-      margin: 1rem 0;
-      font-size: 0.85rem;
-      line-height: 1.5;
+
+    /* Sections */
+    section {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
     }
-    .subtitle { color: #666; font-size: 1rem; margin-bottom: 2rem; }
-    .links { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; }
-    .links a { display: inline-block; margin-right: 2rem; }
-    ul { margin: 1rem 0 1rem 1.5rem; color: #b0b0b0; }
-    li { margin-bottom: 0.5rem; }
+
+    section h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    section p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* Steps */
+    .steps {
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 16px;
+      color: var(--fg);
+    }
+
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--fg);
+      color: var(--bg);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Code */
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--fg);
+    }
+
+    .code-block .comment {
+      color: var(--muted);
+    }
+
+    /* Guarantees */
+    .guarantees {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .guarantee {
+      padding: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .guarantee-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .guarantee-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* Links */
+    .links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .links a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.15s;
+    }
+
+    .links a:hover {
+      border-color: var(--fg);
+    }
+
+    /* Footer */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 80px 0 60px;
+      }
+
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .guarantees {
+        grid-template-columns: 1fr;
+      }
+
+      .links {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>blind402</h1>
-  <p class="subtitle">HTTP 402 Payment Required for APIs</p>
+  <div class="container">
+    <header class="hero">
+      <h1>blind402</h1>
+      <p class="subtitle">HTTP 402 Payment Required for APIs</p>
+      <p class="description">
+        Gate API access behind Solana USDC micropayments. No accounts. No API keys. Pay per request.
+      </p>
+    </header>
 
-  <p>
-    blind402 is a protocol for gating API access behind Solana USDC micropayments. 
-    Clients pay per request. No accounts. No API keys. No authentication.
-  </p>
+    <section>
+      <h2>What it does</h2>
+      <p>
+        blind402 implements HTTP status code 402 for real-world use. Clients pay for each API request using USDC on Solana. The server verifies payment on-chain before returning the response. There is no authentication, no rate limiting by identity, and no stored user data.
+      </p>
+    </section>
 
-  <h2>What is HTTP 402?</h2>
-  <p>
-    HTTP 402 Payment Required is a status code reserved for digital payment systems. 
-    It indicates that a request cannot be fulfilled until the client provides payment. 
-    blind402 implements this status code using Solana USDC transfers.
-  </p>
+    <section>
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>Client requests a protected endpoint</li>
+        <li>Server responds with HTTP 402 and a payment quote</li>
+        <li>Client transfers USDC on Solana with the payment ID in the memo</li>
+        <li>Client retries the request with the quote and transaction signature</li>
+        <li>Server verifies payment on-chain and returns the resource</li>
+      </ol>
+    </section>
 
-  <h2>How It Works</h2>
-  <ul>
-    <li>Client requests a protected endpoint</li>
-    <li>Server responds with HTTP 402 and a payment quote</li>
-    <li>Client transfers USDC on Solana with a memo containing the payment ID</li>
-    <li>Client retries the request with the quote and transaction signature in headers</li>
-    <li>Server verifies the payment on-chain and returns the resource</li>
-  </ul>
+    <section>
+      <h2>Example</h2>
+      <div class="code-block">
+        <span class="comment"># Request without payment</span><br>
+        curl https://api.blind402.com/v1/data<br><br>
+        <span class="comment"># Returns 402 with quote</span><br><br>
+        <span class="comment"># After paying, retry with headers</span><br>
+        curl https://api.blind402.com/v1/data \<br>
+        &nbsp;&nbsp;-H "X-BLIND402-QUOTE: {quote_json}" \<br>
+        &nbsp;&nbsp;-H "X-BLIND402-PAYMENT: {tx_signature}"
+      </div>
+    </section>
 
-  <h2>Example</h2>
-  <p>Request without payment:</p>
-  <pre>curl https://api.blink402.com/v1/data</pre>
+    <section>
+      <h2>Guarantees</h2>
+      <div class="guarantees">
+        <div class="guarantee">
+          <div class="guarantee-title">No accounts</div>
+          <div class="guarantee-desc">No signup, no login, no user database</div>
+        </div>
+        <div class="guarantee">
+          <div class="guarantee-title">No API keys</div>
+          <div class="guarantee-desc">Payment is the only authentication</div>
+        </div>
+        <div class="guarantee">
+          <div class="guarantee-title">No identity</div>
+          <div class="guarantee-desc">No tracking, no cookies, no sessions</div>
+        </div>
+        <div class="guarantee">
+          <div class="guarantee-title">Stateless</div>
+          <div class="guarantee-desc">Each request is independently verified</div>
+        </div>
+      </div>
+    </section>
 
-  <p>Response (402 Payment Required):</p>
-  <pre>{
-  "quote": {
-    "protocol": "blind402",
-    "version": 1,
-    "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-    "recipient": "...",
-    "amount_atomic": 1000,
-    "expires_at": 1767426853733,
-    "payment_id": "96b73a2d...",
-    "tier": 0
-  },
-  "quote_token": "9883c254..."
-}</pre>
+    <section>
+      <h2>Resources</h2>
+      <div class="links">
+        <a href="https://github.com/blind402/blind">GitHub Repository</a>
+        <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md">Protocol Specification</a>
+      </div>
+    </section>
 
-  <p>After paying USDC with memo <code>BLIND402:&lt;payment_id&gt;</code>, retry with headers:</p>
-  <pre>curl https://api.blink402.com/v1/data \
-  -H "X-BLIND402-QUOTE: {entire quote JSON}" \
-  -H "X-BLIND402-PAYMENT: &lt;tx_signature&gt;"</pre>
-
-  <h2>Privacy</h2>
-  <p>
-    blind402 stores no user identity. There are no accounts, sessions, or tracking. 
-    The only data retained is transaction signatures for replay protection, which expire after 15 minutes.
-  </p>
-
-  <div class="links">
-    <a href="https://github.com/blind402/blind">GitHub Repository</a>
-    <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md">Protocol Specification</a>
+    <footer>
+      <p>blind402</p>
+    </footer>
   </div>
 </body>
 </html>
-
