@@ -1,0 +1,34 @@
+{
+  "name": "@blind402/client",
+  "version": "1.0.0",
+  "description": "Client SDK for blind402 - HTTP 402 payments with Solana USDC",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blind402/blind.git"
+  },
+  "keywords": [
+    "blind402",
+    "http-402",
+    "solana",
+    "usdc",
+    "micropayments",
+    "api",
+    "pay-per-request"
+  ],
+  "author": "blind402",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blind402/blind/issues"
+  },
+  "homepage": "https://blind402.com",
+  "dependencies": {
+    "@solana/spl-token": "^0.4.0",
+    "@solana/web3.js": "^1.98.0"
+  },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.98.0"
+  }
+}
+

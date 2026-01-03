@@ -6,7 +6,7 @@
   <title>blind402 - Pay Per Request. Zero Identity.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
@@ -73,6 +73,8 @@
       font-size: 0.9rem;
       text-decoration: none;
       transition: all 0.2s;
+      cursor: pointer;
+      border: none;
     }
     
     .btn-primary {
@@ -105,6 +107,128 @@
     
     .hero-img {
       padding-top: 60px;
+    }
+
+    /* Demo Section */
+    .demo-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .demo-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .demo-section p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .demo-card {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: left;
+    }
+
+    .demo-steps {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .step {
+      flex: 1;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: #8b5cf6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .step h4 {
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    .demo-output {
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      min-height: 120px;
+    }
+
+    .demo-output pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #a78bfa;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .demo-output .status {
+      color: rgba(255,255,255,0.4);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    .demo-output .success { color: #4ade80; }
+    .demo-output .error { color: #f87171; }
+    .demo-output .pending { color: #fbbf24; }
+
+    .demo-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .btn-demo {
+      padding: 16px 40px;
+      font-size: 1rem;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .wallet-info {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      margin-top: 16px;
+    }
+
+    .wallet-info a {
+      color: #a78bfa;
+      text-decoration: none;
     }
     
     /* Footer */
@@ -150,6 +274,10 @@
         gap: 12px;
       }
       .btn { padding: 12px 24px; font-size: 0.85rem; }
+      .demo-section { padding: 40px 20px; }
+      .demo-section h2 { font-size: 1.8rem; }
+      .demo-steps { flex-direction: column; }
+      .demo-buttons { flex-direction: column; }
       footer { 
         flex-direction: column; 
         gap: 20px; 
@@ -165,6 +293,7 @@
     <a href="/" class="logo">BLIND402</a>
     <nav>
       <a href="#how">How It Works</a>
+      <a href="#demo">Try It</a>
       <a href="#faq">FAQ</a>
       <a href="https://github.com/blind402/blind" target="_blank">GitHub</a>
     </nav>
@@ -173,8 +302,8 @@
   <div class="hero-wrapper">
     <img src="1.png" alt="blind402 - Pay Per Request. Zero Identity." class="section-img hero-img" id="hero">
     <div class="hero-buttons">
-      <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md" class="btn btn-primary" target="_blank">Read Docs</a>
-      <a href="https://github.com/blind402/blind" class="btn btn-secondary" target="_blank">View GitHub</a>
+      <a href="#demo" class="btn btn-primary">Try It Live</a>
+      <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md" class="btn btn-secondary" target="_blank">Read Docs</a>
     </div>
   </div>
   
@@ -183,6 +312,50 @@
   <img src="4.png" alt="Guarantees" class="section-img">
   <img src="5.png" alt="FAQ" class="section-img" id="faq">
 
+  <!-- Live Demo Section -->
+  <section class="demo-section" id="demo">
+    <h2>Try It Live</h2>
+    <p>Connect your Phantom wallet and pay $0.01 USDC to test the protocol.</p>
+    
+    <div class="demo-card">
+      <div class="demo-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Connect Wallet</h4>
+          <p>Phantom or any Solana wallet</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Request API</h4>
+          <p>Get 402 + payment quote</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Pay USDC</h4>
+          <p>Sign transaction in wallet</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Get Data</h4>
+          <p>Receive API response</p>
+        </div>
+      </div>
+
+      <div class="demo-output">
+        <pre id="output"><span class="status">Connect wallet to start...</span></pre>
+      </div>
+
+      <div class="demo-buttons">
+        <button id="connectBtn" class="btn btn-primary btn-demo">Connect Wallet</button>
+        <button id="tryBtn" class="btn btn-secondary btn-demo" disabled>Make Request</button>
+      </div>
+
+      <p class="wallet-info" id="walletInfo">
+        Don't have Phantom? <a href="https://phantom.app" target="_blank">Get it here</a>
+      </p>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-brand">blind402</div>
     <div class="footer-links">
@@ -190,6 +363,210 @@
       <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md" target="_blank">Protocol</a>
     </div>
   </footer>
+
+  <script>
+    const API_URL = 'https://api.blind402.com/v1/data';
+    const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+    const MEMO_PROGRAM = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr';
+    
+    let wallet = null;
+    let publicKey = null;
+
+    const output = document.getElementById('output');
+    const connectBtn = document.getElementById('connectBtn');
+    const tryBtn = document.getElementById('tryBtn');
+    const walletInfo = document.getElementById('walletInfo');
+
+    function log(msg, type = '') {
+      const span = document.createElement('span');
+      span.className = type;
+      span.textContent = msg + '\n';
+      output.appendChild(span);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function clearLog() {
+      output.innerHTML = '';
+    }
+
+    // Check for Phantom
+    function getProvider() {
+      if ('phantom' in window) {
+        const provider = window.phantom?.solana;
+        if (provider?.isPhantom) return provider;
+      }
+      return null;
+    }
+
+    // Connect wallet
+    connectBtn.addEventListener('click', async () => {
+      wallet = getProvider();
+      
+      if (!wallet) {
+        window.open('https://phantom.app/', '_blank');
+        return;
+      }
+
+      try {
+        clearLog();
+        log('Connecting to Phantom...', 'pending');
+        
+        const resp = await wallet.connect();
+        publicKey = resp.publicKey.toString();
+        
+        log('Connected: ' + publicKey.slice(0, 8) + '...' + publicKey.slice(-6), 'success');
+        
+        connectBtn.textContent = 'Connected ✓';
+        connectBtn.disabled = true;
+        tryBtn.disabled = false;
+        walletInfo.innerHTML = 'Wallet: ' + publicKey.slice(0, 8) + '...' + publicKey.slice(-6);
+        
+      } catch (err) {
+        log('Connection failed: ' + err.message, 'error');
+      }
+    });
+
+    // Make request
+    tryBtn.addEventListener('click', async () => {
+      if (!wallet || !publicKey) return;
+      
+      tryBtn.disabled = true;
+      clearLog();
+
+      try {
+        // Step 1: Initial request
+        log('→ GET ' + API_URL);
+        log('Requesting API...', 'pending');
+        
+        const resp = await fetch(API_URL);
+        
+        if (resp.status !== 402) {
+          log('Expected 402, got ' + resp.status, 'error');
+          tryBtn.disabled = false;
+          return;
+        }
+
+        log('← 402 Payment Required', 'success');
+        
+        // Step 2: Parse quote
+        const quote = await resp.json();
+        log('Quote received:');
+        log('  Amount: $' + quote.amount_usdc + ' USDC');
+        log('  Payment ID: ' + quote.payment_id.slice(0, 16) + '...');
+        log('  Expires: ' + new Date(quote.expires_at).toLocaleTimeString());
+
+        // Step 3: Build transaction
+        log('\nBuilding transaction...', 'pending');
+        
+        // We need to use Solana web3.js - load from CDN
+        const { Connection, PublicKey, Transaction, TransactionInstruction } = solanaWeb3;
+        
+        const connection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');
+        const sender = new PublicKey(publicKey);
+        const recipient = new PublicKey(quote.recipient);
+        const usdcMint = new PublicKey(USDC_MINT);
+        
+        // Get ATAs (simplified - assumes they exist)
+        const senderAta = await getATA(sender, usdcMint);
+        const recipientAta = await getATA(recipient, usdcMint);
+        
+        const amountLamports = Math.round(quote.amount_usdc * 1_000_000);
+        
+        // Build transaction
+        const tx = new Transaction();
+        
+        // Memo instruction
+        const memo = 'BLIND402:' + quote.payment_id;
+        tx.add(new TransactionInstruction({
+          keys: [],
+          programId: new PublicKey(MEMO_PROGRAM),
+          data: new TextEncoder().encode(memo)
+        }));
+        
+        // Transfer instruction (SPL Token)
+        tx.add(createTransferInstruction(senderAta, recipientAta, sender, amountLamports));
+        
+        const { blockhash } = await connection.getLatestBlockhash();
+        tx.recentBlockhash = blockhash;
+        tx.feePayer = sender;
+        
+        log('Waiting for signature...', 'pending');
+        
+        // Step 4: Sign with Phantom
+        const signed = await wallet.signTransaction(tx);
+        
+        log('Transaction signed', 'success');
+        log('Sending to network...', 'pending');
+        
+        const signature = await connection.sendRawTransaction(signed.serialize());
+        log('TX: ' + signature.slice(0, 20) + '...', 'success');
+        
+        log('Confirming...', 'pending');
+        await connection.confirmTransaction(signature, 'confirmed');
+        log('Payment confirmed!', 'success');
+        
+        // Step 5: Retry with proof
+        log('\n→ GET ' + API_URL + ' (with proof)');
+        
+        const finalResp = await fetch(API_URL, {
+          headers: {
+            'X-BLIND402-QUOTE': JSON.stringify(quote),
+            'X-BLIND402-PAYMENT': signature
+          }
+        });
+        
+        if (finalResp.ok) {
+          const data = await finalResp.json();
+          log('← 200 OK', 'success');
+          log('\nResponse:');
+          log(JSON.stringify(data, null, 2), 'success');
+        } else {
+          log('← ' + finalResp.status + ' ' + finalResp.statusText, 'error');
+        }
+        
+      } catch (err) {
+        log('Error: ' + err.message, 'error');
+      }
+      
+      tryBtn.disabled = false;
+    });
+
+    // Helper: Get Associated Token Address
+    async function getATA(owner, mint) {
+      const { PublicKey } = solanaWeb3;
+      const TOKEN_PROGRAM_ID = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+      const ATA_PROGRAM_ID = new PublicKey('ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL');
+      
+      const [ata] = await PublicKey.findProgramAddress(
+        [owner.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
+        ATA_PROGRAM_ID
+      );
+      return ata;
+    }
+
+    // Helper: Create SPL Token transfer instruction
+    function createTransferInstruction(source, dest, owner, amount) {
+      const { PublicKey, TransactionInstruction } = solanaWeb3;
+      const TOKEN_PROGRAM_ID = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+      
+      const data = Buffer.alloc(9);
+      data.writeUInt8(3, 0); // Transfer instruction
+      data.writeBigUInt64LE(BigInt(amount), 1);
+      
+      return new TransactionInstruction({
+        keys: [
+          { pubkey: source, isSigner: false, isWritable: true },
+          { pubkey: dest, isSigner: false, isWritable: true },
+          { pubkey: owner, isSigner: true, isWritable: false },
+        ],
+        programId: TOKEN_PROGRAM_ID,
+        data
+      });
+    }
+  </script>
+  
+  <!-- Solana Web3.js -->
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
 
 </body>
 </html>
