@@ -4,17 +4,192 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>blind402 - Pay Per Request. Zero Identity.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #000; }
-    img { display: block; width: 100%; max-width: 1366px; margin: 0 auto; }
+    body { 
+      background: #000; 
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    
+    nav {
+      display: flex;
+      gap: 32px;
+    }
+    
+    nav a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    
+    nav a:hover { color: #a78bfa; }
+    
+    /* Hero section with button overlay */
+    .hero-wrapper {
+      position: relative;
+    }
+    
+    .hero-buttons {
+      position: absolute;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 16px;
+    }
+    
+    .btn {
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: #8b5cf6;
+      color: #fff;
+    }
+    
+    .btn-primary:hover {
+      background: #7c3aed;
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    .btn-secondary:hover {
+      border-color: #a78bfa;
+      color: #a78bfa;
+    }
+    
+    /* Images */
+    .section-img { 
+      display: block; 
+      width: 100%; 
+      max-width: 1366px; 
+      margin: 0 auto; 
+    }
+    
+    .hero-img {
+      padding-top: 60px;
+    }
+    
+    /* Footer */
+    footer {
+      background: #000;
+      border-top: 1px solid rgba(139, 92, 246, 0.2);
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1366px;
+      margin: 0 auto;
+    }
+    
+    .footer-brand {
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+    
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover { color: #a78bfa; }
+    
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      nav { gap: 16px; }
+      nav a { font-size: 0.8rem; }
+      .hero-buttons { 
+        flex-direction: column; 
+        bottom: 10%;
+        gap: 12px;
+      }
+      .btn { padding: 12px 24px; font-size: 0.85rem; }
+      footer { 
+        flex-direction: column; 
+        gap: 20px; 
+        text-align: center;
+        padding: 30px 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <img src="1.png" alt="blind402 - Pay Per Request. Zero Identity.">
-  <img src="2.png" alt="How It Works">
-  <img src="3.png" alt="Example">
-  <img src="4.png" alt="Guarantees">
-  <img src="5.png" alt="FAQ">
+
+  <header>
+    <a href="/" class="logo">BLIND402</a>
+    <nav>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/blind402/blind" target="_blank">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero-wrapper">
+    <img src="1.png" alt="blind402 - Pay Per Request. Zero Identity." class="section-img hero-img" id="hero">
+    <div class="hero-buttons">
+      <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md" class="btn btn-primary" target="_blank">Read Docs</a>
+      <a href="https://github.com/blind402/blind" class="btn btn-secondary" target="_blank">View GitHub</a>
+    </div>
+  </div>
+  
+  <img src="2.png" alt="How It Works" class="section-img" id="how">
+  <img src="3.png" alt="Example" class="section-img">
+  <img src="4.png" alt="Guarantees" class="section-img">
+  <img src="5.png" alt="FAQ" class="section-img" id="faq">
+
+  <footer>
+    <div class="footer-brand">blind402</div>
+    <div class="footer-links">
+      <a href="https://github.com/blind402/blind" target="_blank">GitHub</a>
+      <a href="https://github.com/blind402/blind/blob/main/PROTOCOL.md" target="_blank">Protocol</a>
+    </div>
+  </footer>
+
 </body>
 </html>
